@@ -1,0 +1,24 @@
+:root {
+    --color-background : #f0e8e8;
+    --color-bar-main: #D2D9E0;
+    --color-font-gray-medium: #766B6B;
+    --color-font-gray-high: #545454;
+
+
+}
+
+body {
+    background: var(--color-background);
+}
+
+#root {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
