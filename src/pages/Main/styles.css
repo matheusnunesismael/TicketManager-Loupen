@@ -1,4 +1,5 @@
    /* Menu hamburguer */
+
 .menu {
   background: #fff;
   border-radius: 50%;
@@ -19,6 +20,7 @@
   height: 2px;
   top: 29px;
   left: 15px;
+  z-index: 3;
   transition: 0.5s ease-in-out;
 }
 
@@ -43,6 +45,7 @@
 
 .inputHamburguer {
   display: none;
+  z-index: 3;
 }
 
 .inputHamburguer:checked ~ label .menu {
@@ -72,14 +75,14 @@
 
 .contextMenu{
   position: absolute;
-  transform: translate(-50%, -50%);
+  transform: translate(0, -50%);
 
   font-size: 45px;
   display: none;
   width: 100%;
   opacity: 0;
   transition: 0.25s 0.1s cubic-bezier(0, 1.07, 0, 1.02);
-  z-index: 2;
+  z-index: 0;
 }
 
 .topBarContext{
@@ -136,11 +139,307 @@
 
 /* Conteudo da pagina */
 .contentContainerMain{
-  display: flex;
+  display: flexbox;
   justify-content: center;
   align-items: center;
 }
 .contentContainerMain .topBarContent{
-  width: 100%;
+  width: 100vw;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  background: #D2D9E0;
+}
+.logoFrashdeskTopBar{
+  height: 50px;
+  margin: 0 10px 0 10px;
+  display: block;
+  float: left;
+}
+.inputSearchTopBar{
+  background-image: url('https://www.w3schools.com/howto/searchicon.png');
+  background-position: 10px 10px; 
+  background-repeat: no-repeat;
+  padding: 12px 10px 12px 40px;
+  
+  border-radius: 18px;
+  width: 80vw;
+  border: 1px solid #ccc;
+  margin-top: 2px;
+  font-size: 16px;
+  outline: none;
+  box-shadow: 0 0 0 0 #948585;
+}
+.inputSearchTopBar:focus{
+  box-shadow: 0 0 2px 0 rgb(126, 126, 126);  
+}
+.inputSearchTopBar::placeholder{
+  color: #beb5b5;
+}
+.containerNewTicket{
+  display: none;
+}
+.searchFilters{
+  display: none;
 }
 
+/* Tiket */
+.ticketCard{
+  width: 100vw;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  height: 140px;
+  margin: 10px 0 10px 0;
+  border-radius: 18px;
+}
+
+
+
+.section1{
+  display: flexbox;
+  float: inline-start;
+  width: 25vw;
+}
+.remainingTimeticket1{
+  font-size: 10px;
+  padding-left: 10px;
+  margin-top: 5px;
+  width: 300px;
+  text-align: left;
+}
+.remainingTimeticket2{
+  display: none;
+}
+.userNameTicket{
+
+}
+.containerImageTicket{
+  width: 100%;
+  justify-content: center;
+  margin-top: 5px;
+  display: flex;
+}
+.containerImageTicket img{
+  height: 60px;
+}
+.tagsContainer{
+  width: 200px;
+  margin: 8px 0 0 10px;
+  overflow: hidden;
+  display: flex;
+}
+.tagsContainer .tagTicket{
+  width: 40px;
+  font-size: 13px;
+}
+
+
+
+.section2{
+  display: flex;
+  float:inline-start;
+  align-items:center;
+  justify-content: center;
+  width: 45vw;
+}
+.section2 text{
+  text-align: justify;
+}
+
+.section3{
+  display: flex;
+  float: inline-end;
+  align-items: center;
+  justify-content: center;
+  width: 25vw;
+  
+}
+.containerSection{
+  display: block;
+  float: right;
+}
+.priorityTicket{
+  display: flex;
+}
+.priorityTicket text{
+  margin-bottom: 3px;
+}
+.iconePrioridade{
+  display: block;
+  width: 20px;
+  margin-left: 10px;
+  border-radius: 50%;
+}
+
+.lowPriority{
+  background: var(--color-priority-low);
+}
+.mediumPriority{
+  background: var(--color-priority-medium);
+}
+.highPriority{
+  background: var(--color-priority-high);
+}
+.urgentPriority{
+  background: var(--color-priority-urgent);
+}
+.sectionDivider{
+  height: 65px;
+}
+.statusTicket{
+  background: #F6F4F4;
+  border: 1px solid #7D7878;
+  border-radius: 10px;
+  padding: 3px 0 5px 0;
+  display: block;
+  float: inline-end;
+}
+
+/* adaptando Layout para Desktop */
+@media(min-width: 1000px){
+  .menu{
+    display: none;
+  }
+  .hamburguer{
+    display: none;
+  }
+  .formContainerInput{
+    border: 1px solid black;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .inputSearchTopBar{
+    width: 50vw;
+  }
+  .containerNewTicket{
+    display: block;
+    padding-left: 20px;
+  }
+  .buttonNewTicket{
+    padding: 12px 12px 12px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #25C16F;
+    border: none;
+    color: white;
+    outline: none;
+    transition: .3s;
+    border-radius: 10px;
+  }
+  .buttonNewTicket:hover{
+    background: #22a15d;
+  }
+  .buttonNewTicket .iconNewTicket{
+    margin-right: 5px;
+  }
+  .ticketsResult{
+    border: 1px solid black;
+  }
+  
+  .ticketsResult{
+    display: grid;
+    max-width: 100%;
+    grid-template-rows: 1fr 100px;
+    grid-template-columns: 300px 1fr;
+    grid-template-areas: 
+      "filters results"
+      "footer footer"
+    ;
+  }
+  .searchFilters{
+    display: flex;
+    justify-content: center;
+    grid-area: filters;
+    padding-top: 30px;
+    border: 1px solid green;
+
+  }
+  .tituloFiltros{
+    display: flex;
+    width: 80%;
+    justify-content: center;
+    height: 30px;
+    border-bottom: 1px solid #080808;
+  }
+  .searchResults{
+    grid-area: results;
+  }
+
+  .ticketCard{
+    width: 65vw;
+  }
+  .section1{
+    width: 10vw;
+  }
+  .containerRequesterInformations{
+    display: flex;
+    margin: 20px 0 0 15px;
+    padding-left: 10px;
+    align-items: center;
+  }
+  .containerRequesterInformations .userNameTicket{
+    margin-left: 5px;
+  }
+  .remainingTimeticket1{
+    display: none;
+  }
+
+  .tagsContainer{
+    width:600px;
+    margin: 20px 0 0 100px;
+  }
+
+  .tagsContainer .tagTicket{
+    background: #3388FF;
+    text-align: justify;
+    display: flex;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    min-width: 50px;
+    border-radius: 20px;
+    padding: 5px 10px 7px 5px;
+    margin-left: 8px;
+  }
+  .section2{
+    padding: 20px 0 0 30px;
+    align-items:initial;
+    
+  }
+  .remainingTimeticket2{
+    font-size: 11px;
+    display: block;
+    padding-left: 10px;
+    margin-top: 5px;
+    width: 300px;
+    text-align: left;
+  }
+  .statusTicket{
+    width: 90px;
+  }
+  .section3{
+    display: flex;
+    align-content: flex-end;
+  }
+  .priorityTicket{
+    padding-right: 10px;
+    justify-content: flex-end;
+
+  }
+  .iconePrioridade{
+    float: right;
+  }
+  .sectionDivider{
+    height: 30px;
+  }
+  .containerStatus{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+  }
+
+}

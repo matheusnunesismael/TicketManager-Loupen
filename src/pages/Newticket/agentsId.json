@@ -1,0 +1,187 @@
+// informações obtidas em https://loupendemo.freshdesk.com/api/_/bootstrap/agents_group
+{
+    "data": {
+        "agents": [
+            {
+                "id": 8029575395,
+                "contact": {
+                    "name": " João Dotta",
+                    "email": "joao.dotta@loupen.com.br"
+                },
+                "group_ids": [],
+                "type": "support_agent"
+            },
+            {
+                "id": 8000780304,
+                "contact": {
+                    "name": "Alexandre Schio",
+                    "email": "alexandre@loupen.com.br"
+                },
+                "group_ids": [],
+                "type": "support_agent"
+            },
+            {
+                "id": 8030197508,
+                "contact": {
+                    "name": "Christian Menendez",
+                    "email": "pistydotta@gmail.com"
+                },
+                "group_ids": [],
+                "type": "support_agent"
+            },
+            {
+                "id": 8028073248,
+                "contact": {
+                    "name": "Diogo Guerra",
+                    "email": "diogo.guerra@loupen.com.br"
+                },
+                "group_ids": [],
+                "type": "support_agent"
+            },
+            {
+                "id": 8006302262,
+                "contact": {
+                    "name": "Eric Dantas",
+                    "email": "eric.dantas@loupen.com.br"
+                },
+                "group_ids": [],
+                "type": "support_agent"
+            },
+            {
+                "id": 8025104378,
+                "contact": {
+                    "name": "Luiz Heringer",
+                    "email": "luiz@loupen.com.br"
+                },
+                "group_ids": [],
+                "type": "support_agent"
+            },
+            {
+                "id": 8011888524,
+                "contact": {
+                    "name": "Marcelo Araujo",
+                    "email": "marcelo.araujo@loupen.com.br"
+                },
+                "group_ids": [],
+                "type": "support_agent"
+            },
+            {
+                "id": 8017671570,
+                "contact": {
+                    "name": "Marllon Dev",
+                    "email": "mlmainardes@gmail.com"
+                },
+                "group_ids": [],
+                "type": "support_agent"
+            },
+            {
+                "id": 8012198338,
+                "contact": {
+                    "name": "Marllon Mainardes",
+                    "email": "marllon@loupen.com.br"
+                },
+                "group_ids": [
+                    8000076558
+                ],
+                "type": "support_agent"
+            },
+            {
+                "id": 8014031891,
+                "contact": {
+                    "name": "Maysa da Rodrigues da Silva",
+                    "email": "maysa.silva@loupen.com.br"
+                },
+                "group_ids": [],
+                "type": "support_agent"
+            },
+            {
+                "id": 8024186403,
+                "contact": {
+                    "name": "Samuel Pares",
+                    "email": "samuel@loupen.com.br"
+                },
+                "group_ids": [],
+                "type": "support_agent"
+            },
+            {
+                "id": 8025856900,
+                "contact": {
+                    "name": "Samuel Pares",
+                    "email": "samuelpares@gmail.com"
+                },
+                "group_ids": [
+                    8000080433
+                ],
+                "type": "support_agent"
+            },
+            {
+                "id": 8013002219,
+                "contact": {
+                    "name": "Suzy Rodrigues",
+                    "email": "suzy@loupen.com.br"
+                },
+                "group_ids": [
+                    8000076558
+                ],
+                "type": "support_agent"
+            },
+            {
+                "id": 8029433537,
+                "contact": {
+                    "name": "Taylor Byk",
+                    "email": "taylor.byk@loupen.com.br"
+                },
+                "group_ids": [],
+                "type": "support_agent"
+            },
+            {
+                "id": 8030155582,
+                "contact": {
+                    "name": "Test-dev",
+                    "email": "teste-dev@loupen.com.br"
+                },
+                "group_ids": [],
+                "type": "support_agent"
+            },
+            {
+                "id": 8027825860,
+                "contact": {
+                    "name": "vishaal s",
+                    "email": "vishaal.shanmugavel@freshworks.com"
+                },
+                "group_ids": [],
+                "type": "support_agent"
+            }
+        ],
+        "groups": [
+            {
+                "id": 8000080433,
+                "name": "Acesso de cliente",
+                "agent_ids": [
+                    8025856900
+                ],
+                "group_type": "support_agent_group",
+                "assignment_type": 0
+            },
+            {
+                "id": 8000080320,
+                "name": "Teste Bruno",
+                "agent_ids": [],
+                "group_type": "support_agent_group",
+                "assignment_type": 0
+            },
+            {
+                "id": 8000076558,
+                "name": "TI",
+                "agent_ids": [
+                    8012198338,
+                    8013002219
+                ],
+                "group_type": "support_agent_group",
+                "assignment_type": 1,
+                "round_robin_type": 1,
+                "allow_agents_to_change_availability": false
+            }
+        ]
+    }
+}

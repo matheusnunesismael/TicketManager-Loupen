@@ -8,6 +8,10 @@
     --color-font-option: #766B6B;
     --color-font-option-exit: #C80E0E;
 
+    --color-priority-low: #C80E0E;
+    --color-priority-medium: #C80E0E;
+    --color-priority-high: #C80E0E;
+    --color-priority-urgent: #C80E0E;
 }
 
 body {
