@@ -1,15 +1,15 @@
 .formcontainer{
 
 }
-.tituloNewticket{
-    font-size: 21px;
-    border-bottom: .7px solid #bbbbbb;
-    margin: 0 10px 0 10px;
-}
 .formNewTicket{
     display: flexbox;
     padding: 8px 10px 0 10px;
     text-align: left;
+}
+.tituloNewticket{
+    font-size: 21px;
+    border-bottom: .7px solid #bbbbbb;
+    margin: 0 10px 0 10px;
 }
 .inputDescription{
     margin: 20px 0 10px 0;
@@ -30,4 +30,107 @@
 .formSelect option{
     font-size: 12px;
     width: 50px;
+}
+.checkboxForm{
+    display: flex;
+    align-items: center;
+    padding: 10px 0 0 0;
+    font-size: 16px;
+}
+.checkboxForm input{
+    margin: 0 10px 0 4px;
+    height: 30px;
+    width: 25px;
+}
+
+/* descrição text editor */
+
+.editorClassName{
+    background: white;
+    margin-top: -5px;
+    padding: 0 7px 0 7px;
+    max-width: 100%;
+    overflow: scroll;
+    z-index: 0;
+}
+
+/* submit */
+.submitContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0 70px 0;
+}
+.submitSalvar{
+    width: 100px;
+    border: none;
+    background: rgb(21, 204, 143);
+    color: white;
+    font-size: 17px;
+    padding: 10px 0 10px 0;
+    border-radius: 7px;
+    margin-right: 15px;
+    outline: none;
+}
+.submitCancelar{
+    width: 100px;
+    border: none;
+    background: rgb(233, 106, 106);
+    color: white;
+    font-size: 17px;
+    padding: 10px 0 10px 0;
+    border-radius: 7px;
+    outline: none;
+}
+.toolbarClassName{
+    z-index: 0;
+}
+
+@media(min-width: 1000px){
+    .formContent{
+        margin-top: 50px;
+    }
+    .formcontainer{
+        display: flex;
+        align-items: center;
+        width: 100%;
+        justify-content: center;
+    }
+    .formNewTicket{
+        width: 70%;
+        background: white;
+        box-shadow: 0 0 5px 0 #bbb4b4;
+        border-radius: 12px;
+    }
+    .formInput{
+        background: #f3f0f0;
+        margin-top: 10px;
+        box-shadow: 0 0 1px 0 #535151;
+        border-radius: 5px;
+        height: 35px;
+    }
+    .formInput:focus{
+        box-shadow: 0 0 3px 0 #535151;
+    }
+    .inputDescription{
+        margin: 10px 0 10px 0;
+        font-size: 15spx;
+    }
+    .editorClassName{
+        border: 1px solid #e7e0e0;
+    }
+    .formSelect option{
+        font-size: 17px;
+        width: 50px;
+        padding: 5px 0 0 5px;
+    }
+    .topBarContent{
+        position: fixed;
+        z-index: 1;
+        
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+
 }
