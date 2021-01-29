@@ -19,7 +19,7 @@ export default function Login(){
                 username: emailLogin,
                 password: senha
             }
-            const resultLogin = await api.get('api/v2/tickets', {
+            const resultLogin = await api.get('tickets', {
                 auth
             }).then( response => {
                     if(response.status == 200){

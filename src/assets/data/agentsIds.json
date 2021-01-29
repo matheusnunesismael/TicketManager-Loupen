@@ -5,7 +5,7 @@
                 "id": 8029575395,
                 "contact": {
                     "name": " João Dotta",
-                    "email": "joao.dotta@loupen.com.br"
+                    "email": "j@e.com.br"
                 },
                 "group_ids": [],
                 "type": "support_agent"
@@ -14,7 +14,7 @@
                 "id": 8000780304,
                 "contact": {
                     "name": "Alexandre Schio",
-                    "email": "alexandre@loupen.com.br"
+                    "email": "a@e.com.br"
                 },
                 "group_ids": [],
                 "type": "support_agent"
@@ -23,7 +23,7 @@
                 "id": 8030197508,
                 "contact": {
                     "name": "Christian Menendez",
-                    "email": "pistydotta@gmail.com"
+                    "email": "p@e.com"
                 },
                 "group_ids": [],
                 "type": "support_agent"
@@ -32,7 +32,7 @@
                 "id": 8028073248,
                 "contact": {
                     "name": "Diogo Guerra",
-                    "email": "diogo.guerra@loupen.com.br"
+                    "email": "d@e.com.br"
                 },
                 "group_ids": [],
                 "type": "support_agent"
@@ -41,7 +41,7 @@
                 "id": 8006302262,
                 "contact": {
                     "name": "Eric Dantas",
-                    "email": "eric.dantas@loupen.com.br"
+                    "email": "e@e.com.br"
                 },
                 "group_ids": [],
                 "type": "support_agent"
@@ -50,7 +50,7 @@
                 "id": 8025104378,
                 "contact": {
                     "name": "Luiz Heringer",
-                    "email": "luiz@loupen.com.br"
+                    "email": "l@e.com.br"
                 },
                 "group_ids": [],
                 "type": "support_agent"
@@ -59,7 +59,7 @@
                 "id": 8011888524,
                 "contact": {
                     "name": "Marcelo Araujo",
-                    "email": "marcelo.araujo@loupen.com.br"
+                    "email": "m@e.com.br"
                 },
                 "group_ids": [],
                 "type": "support_agent"
@@ -68,7 +68,7 @@
                 "id": 8017671570,
                 "contact": {
                     "name": "Marllon Dev",
-                    "email": "mlmainardes@gmail.com"
+                    "email": "m@e.com"
                 },
                 "group_ids": [],
                 "type": "support_agent"
@@ -77,7 +77,7 @@
                 "id": 8012198338,
                 "contact": {
                     "name": "Marllon Mainardes",
-                    "email": "marllon@loupen.com.br"
+                    "email": "m@e.com.br"
                 },
                 "group_ids": [
                     8000076558
@@ -88,7 +88,7 @@
                 "id": 8014031891,
                 "contact": {
                     "name": "Maysa da Rodrigues da Silva",
-                    "email": "maysa.silva@loupen.com.br"
+                    "email": "m@e.com.br"
                 },
                 "group_ids": [],
                 "type": "support_agent"
@@ -97,7 +97,7 @@
                 "id": 8024186403,
                 "contact": {
                     "name": "Samuel Pares",
-                    "email": "samuel@loupen.com.br"
+                    "email": "s@e.com.br"
                 },
                 "group_ids": [],
                 "type": "support_agent"
@@ -106,7 +106,7 @@
                 "id": 8025856900,
                 "contact": {
                     "name": "Samuel Pares",
-                    "email": "samuelpares@gmail.com"
+                    "email": "s@e.com"
                 },
                 "group_ids": [
                     8000080433
@@ -117,7 +117,7 @@
                 "id": 8013002219,
                 "contact": {
                     "name": "Suzy Rodrigues",
-                    "email": "suzy@loupen.com.br"
+                    "email": "s@e.com.br"
                 },
                 "group_ids": [
                     8000076558
@@ -128,7 +128,7 @@
                 "id": 8029433537,
                 "contact": {
                     "name": "Taylor Byk",
-                    "email": "taylor.byk@loupen.com.br"
+                    "email": "t@e.com.br"
                 },
                 "group_ids": [],
                 "type": "support_agent"
@@ -137,7 +137,7 @@
                 "id": 8030155582,
                 "contact": {
                     "name": "Test-dev",
-                    "email": "teste-dev@loupen.com.br"
+                    "email": "t@e.com.br"
                 },
                 "group_ids": [],
                 "type": "support_agent"
@@ -146,7 +146,7 @@
                 "id": 8027825860,
                 "contact": {
                     "name": "vishaal s",
-                    "email": "vishaal.shanmugavel@freshworks.com"
+                    "email": "v@e.com"
                 },
                 "group_ids": [],
                 "type": "support_agent"

@@ -1,3 +1,9 @@
+.linkRoute{
+  text-decoration: none;
+  color : var(--color-font-gray-high);
+  cursor: pointer;
+}
+   
    /* Menu hamburguer */
 
 .menu {
@@ -11,6 +17,7 @@
   z-index: 1;
   box-shadow: 0 0 0 0 #fff, 0 0 0 0 #fff;
   transition: box-shadow 1.1s cubic-bezier(0.19, 1, 0.22, 1);
+  cursor: pointer;
 }
 
 .hamburguer {
@@ -117,6 +124,7 @@
   margin-right: 20px;
   margin-bottom: 10px;
   border-top: 1px solid black;
+  cursor: pointer;
 }
 
 .contextOption + .contextOption{
@@ -135,6 +143,7 @@
   border-top: 1px solid black;
   border-bottom: 1px solid black;
   padding-bottom: 15px;
+  cursor: pointer;
 }
 
 /* Conteudo da pagina */
@@ -185,13 +194,13 @@
 
 /* Tiket */
 .ticketCard{
-  width: 100vw;
   background: #fff;
   display: flex;
   justify-content: center;
   height: 140px;
   margin: 10px 0 10px 0;
   border-radius: 18px;
+  cursor: pointer;
 }
 
 
@@ -225,12 +234,12 @@
 }
 .tagsContainer{
   width: 200px;
-  margin: 8px 0 0 10px;
+  margin: 8px 0 0 20px;
   overflow: hidden;
   display: flex;
 }
 .tagsContainer .tagTicket{
-  width: 40px;
+  width: auto;
   font-size: 13px;
 }
 
@@ -261,6 +270,7 @@
 }
 .priorityTicket{
   display: flex;
+  margin-right: 0;
 }
 .priorityTicket text{
   margin-bottom: 3px;
@@ -296,6 +306,18 @@
   float: inline-end;
 }
 
+.searchResults{
+  margin-bottom: 20px;
+}
+
+.compSkelethon{
+  display: block;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  width: 100%;
+  border-radius: 20px
+}
+
 /* adaptando Layout para Desktop */
 @media(min-width: 1000px){
   .menu{
@@ -318,6 +340,7 @@
     padding-left: 20px;
   }
   .buttonNewTicket{
+    text-decoration: none;
     padding: 12px 12px 12px 12px;
     display: flex;
     align-items: center;
@@ -328,6 +351,7 @@
     outline: none;
     transition: .3s;
     border-radius: 10px;
+    cursor: pointer;
   }
   .buttonNewTicket:hover{
     background: #22a15d;
@@ -335,24 +359,18 @@
   .buttonNewTicket .iconNewTicket{
     margin-right: 5px;
   }
-  .ticketsResult{
-    border: 1px solid black;
-  }
+  
   
   .ticketsResult{
-    display: grid;
+    margin-top: 60px;
+    display: flex;
     max-width: 100%;
-    grid-template-rows: 1fr 100px;
-    grid-template-columns: 300px 1fr;
-    grid-template-areas: 
-      "filters results"
-      "footer footer"
-    ;
+    justify-content: center;
+    
   }
   .searchFilters{
     display: flex;
     justify-content: center;
-    grid-area: filters;
     padding-top: 30px;
     border: 1px solid green;
 
@@ -364,10 +382,7 @@
     height: 30px;
     border-bottom: 1px solid #080808;
   }
-  .searchResults{
-    grid-area: results;
-  }
-
+  
   .ticketCard{
     width: 65vw;
   }
@@ -389,7 +404,7 @@
 
   .tagsContainer{
     width:600px;
-    margin: 20px 0 0 100px;
+    margin: 20px 0 0 20px;
   }
 
   .tagsContainer .tagTicket{
@@ -399,7 +414,7 @@
     color: white;
     align-items: center;
     justify-content: center;
-    min-width: 50px;
+    width:auto;
     border-radius: 20px;
     padding: 5px 10px 7px 5px;
     margin-left: 8px;
@@ -427,7 +442,7 @@
   .priorityTicket{
     padding-right: 10px;
     justify-content: flex-end;
-
+    padding-right: 30px;
   }
   .iconePrioridade{
     float: right;
@@ -441,4 +456,7 @@
     margin-bottom: 25px;
   }
 
+  .compSkelethon{
+    width: 65vw;
+  }
 }

@@ -2,15 +2,15 @@
     --color-background : #f0e8e8;
     --color-bar-main: #D2D9E0;
     --color-font-gray-medium: #766B6B;
-    --color-font-gray-high: #545454;
+    --color-font-gray-high: #444242;
     --color-top-bar: #D2D9E0;
     --color-top-bar-context: #33AAFF;
     --color-font-option: #766B6B;
     --color-font-option-exit: #C80E0E;
 
-    --color-priority-low: #C80E0E;
-    --color-priority-medium: #C80E0E;
-    --color-priority-high: #C80E0E;
+    --color-priority-low: #0ec862;
+    --color-priority-medium: #186eb4;
+    --color-priority-high: #e77407;
     --color-priority-urgent: #C80E0E;
 }
 

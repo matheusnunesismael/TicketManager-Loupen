@@ -1,4 +1,6 @@
 import React , { useState, useEffect } from 'react';
+import { Link , useHistory, useParams } from 'react-router-dom';
+
 
 import '../Main/styles.css'
 import './styles.css'
@@ -15,42 +17,66 @@ import iconeLoupen from '../../assets/images/icone-Loupen.png';
 import iconeFreshdesk from '../../assets/images/logo-Freshdesk.png';
 import { Editor } from "react-draft-wysiwyg";
 
-export default function Newticket(){
-     // dados de acesso à API
-     let authLogin = localStorage.getItem('authLogin');
-     let authPass = localStorage.getItem('authPass');
+export default function Changeticket(){
+    const history = useHistory();
+    // id do ticket a ser alterado
+    const id = useParams('id')
 
-    // campos do formulario
-    const [email, setemail] = useState(null);
-    const [cc_emails, setcc_emails] = useState(null);
-    const [type, settype] = useState(null);
-    const [cf_tipo_do_ticket264377, setcf_tipo_do_ticket264377] = useState(null);
-    const [cf_usurio331473, setcf_usurio331473] = useState(null);
-    const [cf_reclame_aqui_id, setcf_reclame_aqui_id] = useState(null);
-    const [cf_source_external_id, setcf_source_external_id] = useState(null);
-    const [cf_empresa_recebendo_a_reclamao, setcf_empresa_recebendo_a_reclamao] = useState(null);
-    const [cf_cliente_voltou_a_fazer_negocio, setcf_cliente_voltou_a_fazer_negocio] = useState(null);
-    const [cf_quantidade_de_comentarios_de_outros_usuarios, setcf_quantidade_de_comentarios_de_outros_usuarios] = useState(null);
-    const [cf_ticket_congelado_mais_de_30_dias_sem_resposta, setcf_ticket_congelado_mais_de_30_dias_sem_resposta] = useState(null);
-    const [cf_sentimento_do_consumidor, setcf_sentimento_do_consumidor] = useState(null);
-    const [cf_motivo_da_reclamacao, setcf_motivo_da_reclamacao] = useState(null);
-    const [cf_status_do_ticket_no_reclame_aqui, setcf_status_do_ticket_no_reclame_aqui] = useState(null);
-    const [cf_solicitacao_para_o_cliente_avaliar_o_ticket, setcf_solicitacao_para_o_cliente_avaliar_o_ticket] = useState(null);
-    const [cf_existe_um_pedido_de_moderacao, setcf_existe_um_pedido_de_moderacao] = useState(null);
-    const [cf_quantidade_de_solicitacoes_de_moderacao, setcf_quantidade_de_solicitacoes_de_moderacao] = useState(null);
-    const [cf_tipo_de_resposta, setcf_tipo_de_resposta] = useState(null);
-    const [subject, setsubject] = useState(null);
-    const [status, setstatus] = useState(2);
-    const [source, setsource] = useState(3);
-    const [description, setdescription] = useState(null);
-    const [priority, setpriority] = useState(1);
-    const [group_id, setgroup_id] = useState("");
-    const [responder_id, setresponder_id] = useState(null);
-    const [tags, settags] = useState([]);
+    // dados de acesso à API
+    let authLogin = localStorage.getItem('authLogin');
+    let authPass = localStorage.getItem('authPass');
 
-    // acmpos para o editor de descrição
+    // dados do ticket 
+    const [ticket, setticket] = useState({});
+
+
+    // campos para o editor de descrição
     const [descEditor, setDescEditor] = useState("");
     const [contentState, setcontentState] = useState("");
+
+    const changeTicket = (event) => {
+        setticket((prevState) => ({
+           ...prevState,
+           [event.target.name]: event.target.value
+        }));
+        console.log(ticket)
+    }
+
+
+    useEffect(()=>{
+        // carrega os resultados da busca feita na pagina inicial
+        if(ticket == false){
+            console.log("carregou")
+            api.get("tickets/"+id, {
+                "auth": {
+                    "username" : authLogin,
+                    "password" : authPass
+                }
+            }).then(async response => {
+                let ticketResp = response.data;
+                let requester = ticketResp.requester_id;
+                let requesterResponse;
+                try{
+                    requesterResponse = await api.get('contacts/'+requester, {  
+                        "auth": {
+                            "username" : authLogin,
+                            "password" : authPass
+                        }
+                    })
+                }catch(err){
+                    requesterResponse = null;
+                }
+                
+                let nameUserC = requesterResponse == null? "RequesterName" : requesterResponse.data.name.split('@')[0].split(' ')[0];
+
+                ticketResp.requester_id = "https://ui-avatars.com/api/?name="+nameUserC+"&size=128&background=random";
+                ticketResp.responder_id = nameUserC;
+                
+                console.log(ticketResp);
+              
+            });
+        }
+    });
 
     // ibicialização do editor de texto da descrição
     const content = {
@@ -67,7 +93,6 @@ export default function Newticket(){
             },
         ],
     }
-
     
     async function saveTicket(){
         // monta o ticket e o envia para a API
@@ -186,13 +211,13 @@ export default function Newticket(){
                         <div  className="formNewTicket">
 
                             <div className="inputDescription">Contato</div>  
-                            <input type="text" className="formInput" name="email" onChange={e => setemail(e.target.value)} value={email} placeholder ="E-mail do contato"/>
+                            <input type="text" className="formInput" name="email" onChange={changeTicket} value={ticket.email} placeholder ="E-mail do contato"/>
 
                             <div className="inputDescription">Cc</div>  
-                            <input type="text" className="formInput" name="cc_emails" onChange={e => setcc_emails(e.target.value)} value={cc_emails}/>
+                            <input type="text" className="formInput" name="cc_emails" onChange={e => setcc_emails(e.target.value)} value={ticket.cc_emails}/>
 
                             <div className="inputDescription">Tipo</div>  
-                            <select name="type" id="type" className="formInput formSelect" onChange={e => settype(e.target.value)} value={type}>
+                            <select name="type" id="type" className="formInput formSelect" onChange={e => settype(e.target.value)} value={ticket.type}>
                                 <option value="">--</option>
                                 <option value="Mercado Livre">Mercado Livre</option>
                                 <option value="Reclame Aqui">Reclame Aqui</option>
@@ -201,40 +226,40 @@ export default function Newticket(){
                                 type === "Mercado Livre"?
                                     <div className="inputsMercadoLivre">
                                         <div className="inputDescription">Tipo do ticket</div>  
-                                        <select name="cf_tipo_do_ticket264377" id="type" className="formInput formSelect" onChange={e => setcf_tipo_do_ticket264377(e.target.value)} value={cf_tipo_do_ticket264377}>
+                                        <select name="cf_tipo_do_ticket264377" id="type" className="formInput formSelect" onChange={e => setcf_tipo_do_ticket264377(e.target.value)} value={ticket.cf_tipo_do_ticket264377}>
                                             <option value="">--</option>
                                             <option value="Questões">Questões</option>
                                             <option value="Compras">Compras</option>
                                             <option value="Mensagem">Mensagem</option>
                                         </select>
                                         <div className="inputDescription">Usuário</div>  
-                                        <input name="cf_usurio331473" type="text" className="formInput" onChange={e => setcf_usurio331473(e.target.value)} value={cf_usurio331473}/>
+                                        <input name="cf_usurio331473" type="text" className="formInput" onChange={e => setcf_usurio331473(e.target.value)} value={ticket.cf_usurio331473}/>
                                     </div>
                                     :
                                     type === "Reclame Aqui"?
                                         <div className="inputsReclameAqui">
                                             <div className="inputDescription">Reclame Aqui id</div>  
-                                            <input name="cf_reclame_aqui_id" type="number" className="formInput" onChange={e => setcf_reclame_aqui_id(e.target.value)} value={cf_reclame_aqui_id}/>
+                                            <input name="cf_reclame_aqui_id" type="number" className="formInput" onChange={e => setcf_reclame_aqui_id(e.target.value)} value={ticket.cf_reclame_aqui_id}/>
                                             <div className="inputDescription">source_external_id</div>
-                                            <input name="cf_source_external_id" type="number" className="formInput" onChange={e => setcf_source_external_id(e.target.value)} value={cf_source_external_id}/>  
+                                            <input name="cf_source_external_id" type="number" className="formInput" onChange={e => setcf_source_external_id(e.target.value)} value={ticket.cf_source_external_id}/>  
                                             <div className="inputDescription">Empresa recebendo a reclamação</div>
-                                            <input name="cf_empresa_recebendo_a_reclamao" type="text" className="formInput" onChange={e => setcf_empresa_recebendo_a_reclamao(e.target.value)} value={cf_empresa_recebendo_a_reclamao}/> 
+                                            <input name="cf_empresa_recebendo_a_reclamao" type="text" className="formInput" onChange={e => setcf_empresa_recebendo_a_reclamao(e.target.value)} value={ticket.cf_empresa_recebendo_a_reclamao}/> 
                                             <div className="checkboxForm">
                                                 <input name="cf_cliente_voltou_a_fazer_negocio" type="checkbox" onChange={() => {setcf_cliente_voltou_a_fazer_negocio(cf_cliente_voltou_a_fazer_negocio == null? (true) : (null))}} />
                                                 Cliente voltou a fazer negocio?
                                             </div>   
                                             <div className="inputDescription">Quantidade de comentarios de outros usuários</div>
-                                            <input name="cf_quantidade_de_comentarios_de_outros_usuarios" type="number" className="formInput" onChange={e => setcf_quantidade_de_comentarios_de_outros_usuarios(e.target.value)} value={cf_quantidade_de_comentarios_de_outros_usuarios}/>
+                                            <input name="cf_quantidade_de_comentarios_de_outros_usuarios" type="number" className="formInput" onChange={e => setcf_quantidade_de_comentarios_de_outros_usuarios(e.target.value)} value={ticket.cf_quantidade_de_comentarios_de_outros_usuarios}/>
                                             <div className="checkboxForm">
-                                                <input name="cf_ticket_congelado_mais_de_30_dias_sem_resposta" type="checkbox" onChange={() => setcf_ticket_congelado_mais_de_30_dias_sem_resposta(cf_ticket_congelado_mais_de_30_dias_sem_resposta == null? (true) : (null))} value={cf_ticket_congelado_mais_de_30_dias_sem_resposta}/>
+                                                <input name="cf_ticket_congelado_mais_de_30_dias_sem_resposta" type="checkbox" onChange={() => setcf_ticket_congelado_mais_de_30_dias_sem_resposta(cf_ticket_congelado_mais_de_30_dias_sem_resposta == null? (true) : (null))} value={ticket.cf_ticket_congelado_mais_de_30_dias_sem_resposta}/>
                                                 Ticket congelado mais de 30 dias sem resposta
                                             </div>
                                             <div className="inputDescription">Sentimento do consumidor</div>
-                                            <input name="cf_sentimento_do_consumidor" type="text" className="formInput" onChange={e => setcf_sentimento_do_consumidor(e.target.value)} value={cf_sentimento_do_consumidor}/>
+                                            <input name="cf_sentimento_do_consumidor" type="text" className="formInput" onChange={e => setcf_sentimento_do_consumidor(e.target.value)} value={ticket.cf_sentimento_do_consumidor}/>
                                             <div className="inputDescription">Motivo da reclamacao</div>
-                                            <input name="cf_motivo_da_reclamacao" type="text" className="formInput" onChange={e => setcf_motivo_da_reclamacao(e.target.value)} value={cf_motivo_da_reclamacao}/>                 
+                                            <input name="cf_motivo_da_reclamacao" type="text" className="formInput" onChange={e => setcf_motivo_da_reclamacao(e.target.value)} value={ticket.cf_motivo_da_reclamacao}/>                 
                                             <div className="inputDescription">Status do ticket do reclame aqui</div>
-                                            <select name="cf_status_do_ticket_no_reclame_aqui" id="type" className="formInput formSelect" onChange={e => setcf_status_do_ticket_no_reclame_aqui(e.target.value)} value={cf_status_do_ticket_no_reclame_aqui}>
+                                            <select name="cf_status_do_ticket_no_reclame_aqui" id="type" className="formInput formSelect" onChange={e => setcf_status_do_ticket_no_reclame_aqui(e.target.value)} value={ticket.cf_status_do_ticket_no_reclame_aqui}>
                                                 <option value="">--</option>
                                                 <option value="Não respondido">Não respondido</option>
                                                 <option value="Respondido">Respondido</option>
@@ -253,13 +278,13 @@ export default function Newticket(){
                                                 Solicitaçãopara o cliente avaliar o ticket?
                                             </div>
                                             <div className="checkboxForm">
-                                                <input name="cf_existe_um_pedido_de_moderacao" type="checkbox" onChange={() => cf_existe_um_pedido_de_moderacao == null? (true) : (null)} value={cf_existe_um_pedido_de_moderacao}/>
+                                                <input name="cf_existe_um_pedido_de_moderacao" type="checkbox" onChange={() => cf_existe_um_pedido_de_moderacao == null? (true) : (null)} value={ticket.cf_existe_um_pedido_de_moderacao}/>
                                                 Existe um pedido de moderação?
                                             </div>
                                             <div className="inputDescription">Quantidade de solicitações demoderação</div>
-                                            <input name="cf_quantidade_de_solicitacoes_de_moderacao" type="number" className="formInput" onChange={e => setcf_quantidade_de_solicitacoes_de_moderacao(e.target.value)} value={cf_quantidade_de_solicitacoes_de_moderacao}/>
+                                            <input name="cf_quantidade_de_solicitacoes_de_moderacao" type="number" className="formInput" onChange={e => setcf_quantidade_de_solicitacoes_de_moderacao(e.target.value)} value={ticket.cf_quantidade_de_solicitacoes_de_moderacao}/>
                                             <div className="inputDescription">tipo de resposta</div>
-                                            <select name="cf_tipo_de_resposta" id="type" className="formInput formSelect" onChange={e => setcf_tipo_de_resposta(e.target.value)} value={cf_tipo_de_resposta}>
+                                            <select name="cf_tipo_de_resposta" id="type" className="formInput formSelect" onChange={e => setcf_tipo_de_resposta(e.target.value)} value={ticket.cf_tipo_de_resposta}>
                                                 <option value="">--</option>
                                                 <option value="Publica">Publica</option>
                                                 <option value="Privada">Privada</option>
@@ -269,13 +294,11 @@ export default function Newticket(){
                                         <></>
                             }
                             
-                            
-
                             <div className="inputDescription">Assunto</div>
-                            <input name="subject" type="text" className="formInput" onChange={e => setsubject(e.target.value)} value={subject}/>
+                            <input name="subject" type="text" className="formInput" onChange={e => setsubject(e.target.value)} value={ticket.subject}/>
 
                             <div className="inputDescription">Status</div>
-                            <select name="status" id="status" className="formInput formSelect" onChange={e => setstatus(e.target.value)} value={status}>
+                            <select name="status" id="status" className="formInput formSelect" onChange={e => setstatus(e.target.value)} value={ticket.status}>
                                 <option value="2" selected>Aberto</option>
                                 <option value="18">Teste</option>
                                 <option value="3">Pendente</option>
@@ -285,7 +308,7 @@ export default function Newticket(){
                             </select>
 
                             <div className="inputDescription">Origem</div>
-                            <select name="source" id="status" className="formInput formSelect" onChange={e => setsource(e.target.value)} value={source}>
+                            <select name="source" id="status" className="formInput formSelect" onChange={e => setsource(e.target.value)} value={ticket.source}>
                                 <option value="3" selected>Telefone</option> 
                             </select>
 
@@ -310,7 +333,7 @@ export default function Newticket(){
 
 
                             <div className="inputDescription">Prioridade</div>
-                            <select name="priority" id="status" className="formInput formSelect" onChange={e => setpriority(e.target.value)} value={priority}>
+                            <select name="priority" id="status" className="formInput formSelect" onChange={e => setpriority(e.target.value)} value={ticket.priority}>
                                 <option value="1" selected>Baixa</option>
                                 <option value="2">Media</option>
                                 <option value="3">Alta</option>
@@ -318,7 +341,7 @@ export default function Newticket(){
                             </select>
 
                             <div className="inputDescription">Grupo</div>
-                            <select name="group_id" id="status" className="formInput formSelect" onChange={e => {setgroup_id(e.target.value)}} value={group_id}>
+                            <select name="group_id" id="status" className="formInput formSelect" onChange={e => {changeTicket} value={ticket.group_id}>
                                 <option value="" selected>--</option>
                                 {    
                                     agentsIds.data.groups.map(group =>
@@ -330,7 +353,7 @@ export default function Newticket(){
                             </select>
 
                             <div className="inputDescription">Analista</div>
-                            <select name="responder_id" id="status" className="formInput formSelect" onChange={e => setresponder_id(e.target.value)} value={responder_id}>
+                            <select name="responder_id" id="status" className="formInput formSelect" onChange={changeTicket(e.target.value)} value={ticket.responder_id}>
                                 <option value="">--</option>
                                 { 
                                     // Percorre o documento que guarda as informações dobre os agentes
@@ -350,7 +373,7 @@ export default function Newticket(){
                             </select>
 
                             <div className="inputDescription">Tags</div>                        
-                            <input name="tags" type="text" className="formInput" onChange={e => settags(e.target.value)} value={tags}/>
+                            <input name="tags" type="text" className="formInput" onChange={e => settags(e.target.value)} value={ticket.tags}/>
 
                             <div className="submitContainer">
                                 <button className="submitSalvar" type="submit" onClick={()=> saveTicket()}>Salvar</button>

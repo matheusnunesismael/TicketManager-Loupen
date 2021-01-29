@@ -1,0 +1,127 @@
+ /* Card do corpo do ticket */
+ 
+.boxTicketView{
+    display: flex;
+    justify-content: center;
+}
+.ticketViewCard{
+    margin-top: 10px;
+    background-color:rgb(240, 240, 230);
+    width: 90%;
+    height: 100vh;
+    border-radius: 20px;
+    box-shadow: 0 0 3px 0 #b5b5b5;
+    padding: 15px 10px 5px 10px;
+}
+
+.ticketTitulo{
+    font-size: 20px;
+    height: 60px;
+}
+
+.containerRequesterInformationsTicket{
+    display: flex;
+    align-items: center;
+    
+}
+.containerTicket img{
+    height: 60px;
+}
+.userTicket{
+    margin-left: 5px;
+}
+
+.infosIniciais{
+    display: flex;
+    width: 100%;
+}
+.ticketPriority{
+    display: flex;
+}
+.ticketUserRequest{
+    width: 53%;
+}
+.sourceTicket{
+    font-size: 13px;
+    text-align: left;
+}
+.iconePrioridadeTicket{
+    display: block;
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+    border-radius: 50%;
+}
+.legendaDescription{
+    margin: 10px 0 0 10px;
+    text-align: left;
+    font-size: 13px ;
+}
+
+.boxDescription{
+    min-height: 150px;
+    border-radius: 12px;
+    box-shadow: 0 0 3px 0 #b5b5b5;
+    padding: 5px 10px 5px 10px;
+    font-size: 13px;
+    margin-top: 10px;
+    text-align:justify;
+}
+.tiketTimeLeft{
+    margin-top: 10px;
+    font-size: 11px;
+}
+
+/* parametro ticket */
+.paramTicket{
+    margin: 5px 0 15px 0;
+    text-align: left;
+}
+.nameField{
+    font-size: 15px;
+    font-weight: bold;
+}
+.dataParam{
+    font-size: 13px;
+}
+
+/* Botões de ação */
+
+.buttonExcluirTicket{
+    border: none;
+    border-radius: 12px;
+    background: #ec4242;
+    font-size: 20px;
+    padding: 10px;
+    width: 45%;
+    color: white;
+    margin-right: 20px;
+    outline: none;
+}
+.buttonExcluirTicket:hover{
+    background: #ad2828;
+}
+
+.buttonEditarTicket{
+    border: none;
+    border-radius: 12px;
+    background: #7e5bfc;
+    padding: 10px;
+    outline: none;
+    width: 45%;
+    font-size: 20px;
+    color: white;
+}
+.buttonEditarTicket:hover{
+    background: #562fe4;
+}
+
+@media(min-width: 1000px){
+    .boxTicketView{
+        width: 65vw;
+    }
+    .ticketUserRequest{
+        width: 80%;
+    }
+
+}
