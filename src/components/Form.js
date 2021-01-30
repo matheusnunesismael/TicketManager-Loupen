@@ -3,6 +3,7 @@ import React , { useState } from 'react';
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import agentsIds from '../assets/data/agentsIds.json';
 import { Editor } from "react-draft-wysiwyg";
+import '../pages/Main/styles.css'
 
 
 const Form =  ({ticket, changeTicket, contentState, setcontentState, saveTicket, isUpdate}) =>{

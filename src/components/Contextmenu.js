@@ -1,8 +1,16 @@
 import '../pages/Main/styles.css';
 import iconeLoupen from '../assets/images/icone-Loupen.png';
+import { Link , useHistory } from 'react-router-dom';
 
 
 const Contextmenu = ()=>{
+    const history = useHistory();
+
+    function handleLogout(){
+        localStorage.clear();
+        history.push('/');
+    }
+
     return (
         <>
             <input id="menu-hamburguer" type="checkbox" className="inputHamburguer"/>
@@ -21,13 +29,13 @@ const Contextmenu = ()=>{
                             </div>
                         </div>  
                     </div>
-                    <div className="contextOption">
+                    <div className="contextOption" onClick={()=> history.push('/home')}>
                         Listar Tickets
                     </div>
-                    <div className="contextOption">
+                    <div className="contextOption" onClick={()=> history.push('/new')}>
                         Novo Ticket
                     </div>
-                    <div className="contextOptionExit">
+                    <div className="contextOptionExit" onClick={handleLogout}>
                         Sair
                     </div>
                 </div>

@@ -1,5 +1,6 @@
 import '../pages/Main/styles.css';
 import iconeFreshdesk from '../assets/images/logo-Freshdesk.png';
+import AddBoxIcon from '@material-ui/icons/AddBox';
 
 const Topbar = () =>{
     return(

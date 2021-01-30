@@ -96,6 +96,7 @@
     width: 45%;
     color: white;
     margin-right: 20px;
+    cursor: pointer;
     outline: none;
 }
 .buttonExcluirTicket:hover{
@@ -105,6 +106,7 @@
 .buttonEditarTicket{
     border: none;
     border-radius: 12px;
+    cursor: pointer;
     background: #7e5bfc;
     padding: 10px;
     outline: none;
@@ -114,6 +116,9 @@
 }
 .buttonEditarTicket:hover{
     background: #562fe4;
+}
+.skeletonViewTicket{
+    width: 90%;
 }
 
 @media(min-width: 1000px){

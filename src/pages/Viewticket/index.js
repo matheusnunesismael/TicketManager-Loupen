@@ -3,11 +3,9 @@ import './styles.css';
 import { Link , useHistory, useParams } from 'react-router-dom';
 import React , { useState, useEffect } from 'react';
 
-import iconeLoupen from '../../assets/images/icone-Loupen.png';
-import iconeFreshdesk from '../../assets/images/logo-Freshdesk.png';
-import AddBoxIcon from '@material-ui/icons/AddBox';
+import Contextmenu from '../../components/Contextmenu';
+import Topbar from '../../components/Topbar';
 import Skeleton from '@material-ui/lab/Skeleton';
-import Pagination from '@material-ui/lab/Pagination';
 import Ticketparam from './Ticketparam.js';
 
 import api from '../../services/api';
@@ -33,11 +31,6 @@ export default function Viewticket(){
         5: "Fechado",
         18: "Teste",
         23: "EM DESENV"
-    }
-
-    function handleLogout(){
-        localStorage.clear();
-        history.push('/');
     }
 
     useEffect(()=>{
@@ -75,57 +68,33 @@ export default function Viewticket(){
         }
     });
 
+    function excluirTicket(){
+        try{
+            api.delete('tickets/'+id, {  
+                "auth": {
+                    "username" : authLogin,
+                    "password" : authPass
+                }
+            }).then(response =>{
+                console.log(response.data)
+            })
+        }catch(err){
+            alert("Não foi possivel excluir o ticket");
+        }
+    }
+
     return(
         <div>
-            <input id="menu-hamburguer" type="checkbox" className="inputHamburguer"/>
-            <label htmlFor="menu-hamburguer">
-                <div className="menu">
-                    <span className="hamburguer"></span>
-                </div>
-            </label>
-            <div className="contextMenu">
-                <div className="conatinerContext">
-                    <div className="topBarContext">
-                        <div className="topBarContainer">
-                            <img src={ iconeLoupen } alt="userImage" className="imageIconContext"/>
-                            <div className="textUserName">
-                                NomeUsuario
-                            </div>
-                        </div>  
-                    </div>
-                    <div className="contextOption">
-                        Listar Tickets
-                    </div>
-                    <div className="contextOption">
-                        Novo Ticket
-                    </div>
-                    <div className="contextOptionExit" onClick={handleLogout}>
-                        Sair
-                    </div>
-                </div>
-                <label htmlFor="">
-                    <div>
-
-                    </div>
-                </label>
-            </div>
-            
+            <Contextmenu/>
             <div className="contentContainerMain">
-                <div className="topBarContent">
-                    <img src={iconeFreshdesk} alt="FreshdeskTaskManager" className="logoFrashdeskTopBar"/>
-                    <div className="formContainerInput">
-                        <form action="">
-                            <input type="search" placeholder="Buscar Ticket" className="inputSearchTopBar"/>  
-                        </form>
-                    </div>
-                </div>
+                <Topbar/>
                 <div className="ticketsResult">
-                    {
-                        ticketInfo == null?
-                            <></>
-                        :
-                        <div className="searchResults">
-                            <div className="boxTicketView">
+                    <div className="searchResults">
+                        <div className="boxTicketView">
+                        {
+                            ticketInfo == null?
+                                <Skeleton className="skeletonViewTicket" height={300}/>
+                            :
                                 <div className="ticketViewCard">
                                     <div className="ticketTitulo">
                                         {ticketInfo.subject}
@@ -176,15 +145,15 @@ export default function Viewticket(){
                                         
                                     </div>
                                     <div className="buttonsActions">
-                                        <button className="buttonExcluirTicket" >Excluir</button>
+                                        <button className="buttonExcluirTicket" onClick={()=>excluirTicket()}>Excluir</button>
                                         <Link to={"/edit/"+ticketInfo.id} className="linkRoute">
                                             <button className="buttonEditarTicket">Editar</button>
                                         </Link>
                                     </div>
                                 </div>
-                            </div>
+                        }
                         </div>
-                    }
+                    </div>
                 </div>
             </div>
         </div>

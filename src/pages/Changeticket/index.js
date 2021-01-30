@@ -81,15 +81,6 @@ export default function Changeticket(){
     
     // salva o ticket com os dados alterados no form
     async function saveTicket(){
-        // monta o ticket e o envia para a API
-        let description_text = contentState.blocks[0].text;
-
-        setticket((prevState) => ({
-            ...prevState,
-            ["description"]: draftToHtml(contentState),
-            ["description_text"]: description_text
-        }));
-        
         let cleanTicket = ticket;
         // checa os campos e romove os campos vazios
         for(let field in cleanTicket){
@@ -101,9 +92,6 @@ export default function Changeticket(){
                         delete cleanTicket[field][sub_field]
                 }
         }
-
-
-
 
         setticket(cleanTicket);
         
@@ -127,7 +115,7 @@ export default function Changeticket(){
                 <Topbar/>
                 <div className="formContent">
                     <div className="tituloNewticket">
-                        Novo Ticket
+                        Alterar Ticket
                     </div>
                     {
                         ticket == null?

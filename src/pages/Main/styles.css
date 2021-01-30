@@ -326,6 +326,9 @@
   .hamburguer{
     display: none;
   }
+  .contentContainerMain{
+    min-width: 80vw;
+  }
   .formContainerInput{
     width: 100%;
     display: flex;
