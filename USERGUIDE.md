@@ -4,18 +4,18 @@ Aqui estão descritas as principais funções disponiveis na aplicação.
 
 ## Login
 <p align="center">
-  <img src="./fotos_userguide/login.png" width=400>
+  <img src="./fotos_userguide/login.png" width=600>
 </p>
 Na tela de login basta inserir as informações de acesso na plataforma da Freshdesk.
 
 ## Home
 ### web
 <p align="center">
-  <img src="./fotos_userguide/home.png" width=400>
+  <img src="./fotos_userguide/home.png" width=600>
 </p>
 Na tela principal ficam listados os ultimos Tickets cadastrados .
 <p align="center">
-  <img src="./fotos_userguide/topbar.png" width=400>
+  <img src="./fotos_userguide/topbar.png" width=600>
 </p>
 A barra superior contem 4 elementos principais.
 
@@ -35,9 +35,9 @@ No corpo da tela inicial ficam listados os tickets e algumas informações inici
 
 ### mobile
 <p align="center">
-  <img src="./fotos_userguide/mainmobile.png" width=200 style="border: 1px solid">
+  <img src="./fotos_userguide/mainMobile.png" width=200 style="border: 1px solid">
 </p>
-Na visualização mobile da aplicação as funcionalidades presentes na barra do topo ficam excondidas no icone: <img src="./fotos_userguide/iconemobile.png" width=40 style="border: 1px solid"> no canto inferior direito, ao clicar neste botão o menu de opções é aberto. <br/>
+Na visualização mobile da aplicação as funcionalidades presentes na barra do topo ficam excondidas no icone: <img src="./fotos_userguide/iconemobile.png" width=40 style="border: 1px solid"> Localizado no canto inferior direito, ao clicar neste botão o menu de opções é aberto. <br/>
 Esta configuração é mantida em todas as telas.
 <p align="center">
   <img src="./fotos_userguide/contextmobile.png" width=200 style="border: 1px solid">
@@ -45,6 +45,6 @@ Esta configuração é mantida em todas as telas.
 
 ## Visualizar ticket
 <p align="center">
-  <img src="./fotos_userguide/visualizarticketweb.png" width=400>
+  <img src="./fotos_userguide/visualizarticketweb.png" width=600>
 </p>
 Nesta tela ficam exibidas as informações do ticket e aparecem opções para alterar as informações ou excluir o ticket.
