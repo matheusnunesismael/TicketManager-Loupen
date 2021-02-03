@@ -4,30 +4,33 @@ Aqui estão descritas as principais funções disponiveis na aplicação.
 
 ## Login
 <p align="center">
-  <img src="./fotos_userguide/login.png" width=600>
+  <img src="./fotos_userguide/login.png" width=700>
 </p>
 Na tela de login basta inserir as informações de acesso na plataforma da Freshdesk.
 
 ## Home
 ### web
 <p align="center">
-  <img src="./fotos_userguide/home.png" width=600>
+  <img src="./fotos_userguide/home.png" width=700>
 </p>
 Na tela principal ficam listados os ultimos Tickets cadastrados .
 <p align="center">
-  <img src="./fotos_userguide/topbar.png" width=600>
+  <img src="./fotos_userguide/topbar.png" width=700>
 </p>
 A barra superior contem 4 elementos principais.
 
 * **Logo da Freshdesk**
 Ao clicar neste icone em outras telas a aplicação irá reotrnar à página peincipal.
 <br/>
+
 * **Barra de busca**
 Basta inserir algum criterio de busca por tickets e apertar a tecla "Enter" em ambiente web ou "Pesquisar" em abientes mobile.
 <br/>
+
 * **Botão novo Ticket**
 Ao clicar nesse botão a aplicação irá para atela decadastro de tickets.
 <br/>
+
 * **Menu de usuário**
 Ao colocar o mouse sobre o nome do usuário será exibido um menu indicando as opções: Listar Tickets e Sair, na primeira a aplicação irá voltar a tela inicial e na segunda a seção será encerrada.
 
@@ -45,6 +48,21 @@ Esta configuração é mantida em todas as telas.
 
 ## Visualizar ticket
 <p align="center">
-  <img src="./fotos_userguide/visualizarticketweb.png" width=600>
+  <img src="./fotos_userguide/visualizarticketweb.png" width=700>
 </p>
 Nesta tela ficam exibidas as informações do ticket e aparecem opções para alterar as informações ou excluir o ticket.
+<br/><br/>
+Ao clicar em "Excluir" será exibido um diálogo de confirmação e ao cliacar em "Editar" será exibida a tela de edição de informações do ticket.
+
+## Criar ticket
+
+<p align="center">
+  <img src="./fotos_userguide/newticketweb1.png" width=700>
+</p>
+Na tela de cadastro são exibidos os campos para cadastrar o ticket.
+<br/>
+<br/>
+<p align="center">
+  <img src="./fotos_userguide/newticketweb2.png" width=700>
+</p>
+Na parte inferior da pagina o usuário pode salvar o ticket ou cancelar voltando a tela inicial.
