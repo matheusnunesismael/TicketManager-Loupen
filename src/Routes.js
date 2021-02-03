@@ -14,9 +14,11 @@ export default function Routes(){
             <Switch>
                 <Route path='/' exact  component={ Login }/>
                 <Route path='/home' exact  component={ Main }/>
+                <Route path='/home/:q' exact  component={ Main }/>
                 <Route path='/new' exact  component={ Newticket }/>
                 <Route path='/ticket/:id' exact  component={ Viewticket }/>
                 <Route path='/edit/:id' exact  component={ Changeticket }/>
+                <Route component={ Login }/>
             </Switch>
         </BrowserRouter>
     )

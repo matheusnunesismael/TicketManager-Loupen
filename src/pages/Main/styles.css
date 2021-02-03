@@ -152,7 +152,9 @@
   justify-content: center;
   align-items: center;
 }
-.contentContainerMain .topBarContent{
+
+/* TOPBAR */
+.topBarContent{
   width: 100vw;
   height: 55px;
   display: flex;
@@ -164,6 +166,7 @@
   margin: 0 10px 0 10px;
   display: block;
   float: left;
+  cursor: pointer;
 }
 .inputSearchTopBar{
   background-image: url('https://www.w3schools.com/howto/searchicon.png');
@@ -188,9 +191,13 @@
 .containerNewTicket{
   display: none;
 }
-.searchFilters{
+.iconeUsuario{
   display: none;
 }
+
+
+
+
 
 /* Tiket */
 .ticketCard{
@@ -316,6 +323,9 @@
   margin-top: 10px;
   width: 100%;
   border-radius: 20px
+}
+.contextMainDesktop{
+  display: none;
 }
 
 /* adaptando Layout para Desktop */
@@ -462,4 +472,69 @@
   .compSkelethon{
     width: 65vw;
   }
+
+  /* TOPBAR */
+  .iconeUsuarioBox{
+    margin-right: 10px;
+  }
+  .iconeUsuario{
+    display: flex;
+    align-items: center;
+    background: cornsilk;
+    padding: 5px;
+    margin-left: 10px;
+    border-radius: 12px;
+    box-shadow: 0 0 2px 0 #948585;
+    cursor: pointer;
+  }
+  .iconeUsuario:hover{
+    box-shadow: 0 0 4px 0 #948585;
+  }
+  .iconeUsuario img{
+    height: 30px;
+    margin-right: 3px;
+  }
+  .contextMainDesktop{
+    background: #ffffff;
+    box-shadow: 0 2px 1px 0 #948585;
+    padding: 5px;
+    position: fixed;
+    top: 48px;
+    right: 20px;
+    z-index: 3;
+    border-radius: 7px;
+  }
+  .contextMainDesktop:hover{
+    display: block;
+  }
+  .iconeUsuarioBox:hover + .contextMainDesktop{
+    display: block;
+  }
+  .contextMainDesktop ul{
+    list-style: none;
+  }
+  .contextMainDesktop ul li{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 50px;
+    cursor: pointer;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+
+  }
+  .contextMainDesktop ul li:hover{
+    background: #d6cccc;
+  }
+  .contextMainDesktop ul li + li{
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-top: 1px solid #7D7878;
+    color: #ac1616;
+  }
+
+ 
 }

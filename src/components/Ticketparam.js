@@ -1,4 +1,4 @@
-import './styles.css';
+import '../pages/Viewticket/styles.css';
 
 export default function Ticketparam(props) {
     return (
@@ -12,10 +12,10 @@ export default function Ticketparam(props) {
                 </div>
                 <div className="dataParam">
                     {
-                        props.name == false?
+                        props.name === false?
                             "Não"
                         :
-                        props.name == true?
+                        props.name === true?
                             "Sim"
                         :
                         props.name

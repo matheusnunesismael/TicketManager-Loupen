@@ -71,6 +71,7 @@
     border-radius: 7px;
     margin-right: 15px;
     outline: none;
+    cursor: pointer;
 }
 .submitCancelar{
     width: 100px;
@@ -81,11 +82,59 @@
     padding: 10px 0 10px 0;
     border-radius: 7px;
     outline: none;
+    cursor: pointer;
 }
 .toolbarClassName{
     z-index: 0;
 }
+.tokenInput input{    
+    padding-left: 10px;
+    width: 100%;    
+    border: none;
+    outline: none;   
+}
+.tokenInput{
+    background: white;
+}
+/* MODAL */
+.modalDialog{
+    position: absolute;
+    width: 400px;
+    outline: none;
+    background: #f6f8f4;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+}
+.modalBox{
+    text-align: center;
+    display: flexbox;
+}
+.modalTitle{
+    color: #6e6c6c;
+    text-align: center;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #6e6c6c;
+}
+.modalbuttonBox{
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+.modalbuttonBox button{
+    width: 100px;
+    height: 30px;
+    border: none;
+    background: #c3ee8b;
+}
+.modalbuttonBox button:hover{
+    background: #ade465;
+}
 
+
+/* Media port para desktop*/
 @media(min-width: 1000px){
     .formContent{
         margin-top: 50px;
@@ -132,5 +181,5 @@
         left: 0;
         width: 100%;
     }
-
 }
+

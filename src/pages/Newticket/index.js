@@ -7,13 +7,34 @@ import  draftToHtml  from 'draftjs-to-html';
 import Contextmenu from '../../components/Contextmenu';
 import Topbar from '../../components/Topbar';
 import Form from '../../components/Form';
+import Modal from '@material-ui/core/Modal';
+import { useHistory } from 'react-router-dom';
+
 
 import api from '../../services/api';
 
 export default function Newticket(){
+    const history = useHistory();
+
     // dados de acesso à API
     let authLogin = localStorage.getItem('authLogin');
     let authPass = localStorage.getItem('authPass');
+
+    // estado do modal
+    const [open, setopen] = useState(false);
+    const [modalTitle, setmodalTitle] = useState("");
+    const [modalBody, setmodalBody] = useState("");
+    const [modalAction, setmodalAction] = useState(false);
+
+    useEffect(()=>{
+        //controla a seção
+        if(localStorage.getItem('authLogin') == null)
+            history.push('/');
+    })
+
+    function toggleModal(){
+        setopen(!open);
+    }
 
     // campos do formulario
     const [ ticket, setticket] = useState(
@@ -53,22 +74,51 @@ export default function Newticket(){
     // conteudo da descrição
     const [contentState, setcontentState] = useState("");
 
+    
+    // adiciona e remove os tokens inseridos ao formulario de dados
+    function changeTokens(token, index = null){
+        let newTags = ticket.tags;
+        if(newTags === undefined)
+            newTags = [];
+        if(index == null)
+            newTags =  [].concat(newTags, token);
+        else
+            newTags.splice(index, 1);
+        
+        setticket((prevState) => ({
+            ...prevState,
+            "tags": newTags
+        })); 
+    }
+
+
+    // pega o conteudo do editor de texto da descrição
+    function changeStateDesc(state) {
+        setcontentState(state);
+
+        setticket((prevState) => ({
+            ...prevState,
+            "description": draftToHtml(state)
+        }));
+    }
+
     // campos numericos
     let numberFields = ["priority", "requester_id", "responder_id", "group_id", "status"];
 
     const changeTicket = (event) => {
+
         let value = event.target.value;
         let fieldName = event.target.name;
 
-        if(event.target.type == "number" || numberFields.includes(fieldName))
+        if(event.target.type === "number" || numberFields.includes(fieldName))
             value = parseInt(value);
-        else if(event.target.type == "checkbox"){
+        else if(event.target.type === "checkbox"){
             if(ticket[fieldName] == null)
                 value = true
             else
                 value = null
         }
-        if(fieldName.split('_')[0] == 'cf'){
+        if(fieldName.split('_')[0] === 'cf'){
             setticket((prevState) => ({
                 ...prevState,
                 "custom_fields": {
@@ -83,52 +133,52 @@ export default function Newticket(){
                 [fieldName]: value
             }));
         } 
+       
     }
   
     // monta o ticket e o envia para a API
-    async function saveTicket(){
-        let description_text = contentState.blocks[0].text;
+    const saveNewTicket = async () => {
 
-        setticket((prevState) => ({
-            ...prevState,
-            ["description"]: draftToHtml(contentState),
-            ["macarrao"]: description_text
-        }));
-        
-        console.log(ticket)
         let cleanTicket = ticket;
 
         // romoção dos campos vazios
+        
         for(let field in cleanTicket){
-            if(cleanTicket[field] == null || cleanTicket[field] == undefined || cleanTicket[field] == "")
+            if(cleanTicket[field] === null || cleanTicket[field] === undefined || cleanTicket[field] === "")
                 delete cleanTicket[field]
-            else if(field == 'custom_fields')
+            else if(field === 'custom_fields')
                 for(let sub_field in cleanTicket[field]){
-                    if(cleanTicket[field][sub_field] == null || cleanTicket[field][sub_field] == undefined || cleanTicket[field][sub_field] == "")
+                    if(cleanTicket[field][sub_field] === null || cleanTicket[field][sub_field] === undefined || cleanTicket[field][sub_field] === "")
                         delete cleanTicket[field][sub_field]
                 }
         }
 
-        setticket(cleanTicket);
         console.log(ticket)
         
-        /*
         try {
-            await api.post('tickets', ticket, {
+            await api.post('tickets', cleanTicket, {
                 auth: {
                     username: authLogin,
                     password: authPass
                 }
             }).then( response=>{
-                console.log(response.data)
+                if(response.status === 201){
+                    setmodalTitle("Salvo!")
+                    setmodalBody("O ticket foi Salvo");
+                    setmodalAction(true);
+                    toggleModal();
+                }
+                console.log(response)
             })
     
         } catch (err) {
-            alert('Erro ao cadastrar caso, tente novamente.');
+            setmodalTitle("Erro!")
+            setmodalBody("Não foi possivel cadastrar o ticket, os campos Contato, Assunto e Descrição devem ser preenchidos.");
+            setmodalAction(false);
+            toggleModal();
         }
-        */
     }
-
+    
     return(
         <div>
             <Contextmenu/>
@@ -143,11 +193,35 @@ export default function Newticket(){
                         ticket = {ticket} 
                         changeTicket = {changeTicket} 
                         contentState= {contentState} 
-                        setcontentState = {setcontentState}
-                        saveTicket = {saveTicket}
+                        setcontentState = {changeStateDesc}
+                        saveTicket = {saveNewTicket}
                         isUpdate = {false}
+                        changeTokens = {changeTokens}
                     />
                     
+                    <Modal
+                        open={open}
+                        onClose={toggleModal}
+                        aria-labelledby="simple-modal-title"
+                        aria-describedby="simple-modal-description"
+                    >
+                        <div  className="modalDialog">
+                            <div className="modalBox">
+                                <h2 className="modalTitle">{modalTitle}</h2>
+                                <p>
+                                {modalBody}
+                                </p>
+                                <div className="modalbuttonBox">
+                                    {
+                                    modalAction?
+                                        <button onClick={()=>history.push('/home')}>Ok</button>
+                                    :
+                                        <></>
+                                    }                       
+                                </div>
+                            </div>
+                        </div>
+                    </Modal>
                 </div>
             </div>
         </div>

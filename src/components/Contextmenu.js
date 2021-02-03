@@ -1,10 +1,11 @@
 import '../pages/Main/styles.css';
 import iconeLoupen from '../assets/images/icone-Loupen.png';
-import { Link , useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 
 const Contextmenu = ()=>{
     const history = useHistory();
+    let authLogin = localStorage.getItem('authLogin');
 
     function handleLogout(){
         localStorage.clear();
@@ -25,7 +26,7 @@ const Contextmenu = ()=>{
                         <div className="topBarContainer">
                             <img src={ iconeLoupen } alt="userImage" className="imageIconContext"/>
                             <div className="textUserName">
-                                NomeUsuario
+                                { authLogin == null? <></> : authLogin.split('@')[0].split(' ')[0]}
                             </div>
                         </div>  
                     </div>

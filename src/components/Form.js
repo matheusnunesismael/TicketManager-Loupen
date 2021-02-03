@@ -4,9 +4,13 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import agentsIds from '../assets/data/agentsIds.json';
 import { Editor } from "react-draft-wysiwyg";
 import '../pages/Main/styles.css'
+import ChipInput from 'material-ui-chip-input';
+import { useHistory } from 'react-router-dom';
 
 
-const Form =  ({ticket, changeTicket, contentState, setcontentState, saveTicket, isUpdate}) =>{
+
+const Form =  ({ticket, changeTicket, contentState, setcontentState, saveTicket, isUpdate, changeTokens}) =>{
+    const history = useHistory();
 
     // inicialização do editor de texto da descrição
     const content = {
@@ -190,11 +194,16 @@ const Form =  ({ticket, changeTicket, contentState, setcontentState, saveTicket,
                 </select>
 
                 <div className="inputDescription">Tags</div>                        
-                <input name="tags" type="text" className="formInput" onChange={changeTicket} value={ticket.tags}/>
+                <ChipInput
+                    value={ticket.tags}
+                    onAdd={(chip) => changeTokens(chip)}
+                    onDelete={(chip, index) => changeTokens(chip, index)}
+                    className="tokenInput formInput"
+                />
 
                 <div className="submitContainer">
                     <button className="submitSalvar" type="submit" onClick={()=> saveTicket()}>Salvar</button>
-                    <button className="submitCancelar">Cancelar</button>
+                    <button className="submitCancelar" onClick={()=>history.push('/home')}>Cancelar</button>
                 </div>
             </div>
         </div>

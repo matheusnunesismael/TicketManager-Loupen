@@ -120,7 +120,32 @@
 .skeletonViewTicket{
     width: 90%;
 }
-
+.modalbuttonBoxEdit{
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+.buttonModalExclude{
+    background: crimson;
+    width: 100px;
+    height: 30px;
+    margin-right: 10px;
+    border: none;
+    cursor: pointer;
+}
+.buttonModalExclude:hover{
+    background: rgb(182, 24, 55);
+}
+.buttonModalCancel{
+    background: rgb(106, 92, 233);
+    width: 100px;
+    height: 30px;
+    border: none;
+    cursor: pointer;
+}
+.buttonModalCancel:hover{
+    background: rgb(91, 77, 214);
+}
 @media(min-width: 1000px){
     .boxTicketView{
         width: 65vw;

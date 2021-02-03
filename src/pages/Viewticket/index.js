@@ -6,10 +6,10 @@ import React , { useState, useEffect } from 'react';
 import Contextmenu from '../../components/Contextmenu';
 import Topbar from '../../components/Topbar';
 import Skeleton from '@material-ui/lab/Skeleton';
-import Ticketparam from './Ticketparam.js';
+import Ticketparam from '../../components/Ticketparam.js';
+import Modal from '@material-ui/core/Modal';
 
 import api from '../../services/api';
-
 
 export default function Viewticket(){
     const history = useHistory();
@@ -33,7 +33,20 @@ export default function Viewticket(){
         23: "EM DESENV"
     }
 
+    // estado do modal
+    const [open, setopen] = useState(false);
+    const [modalTitle, setmodalTitle] = useState("");
+    const [modalBody, setmodalBody] = useState("");
+    const [modalAction, setmodalAction] = useState(false);
+
+    function toggleModal(){
+        setopen(!open);
+    }
+
     useEffect(()=>{
+        //controla a seção
+        if(localStorage.getItem('authLogin') == null)
+            history.push('/');
         // carrega os resultados da busca feita na pagina inicial
         if(ticketInfo == null){
             console.log("carregou")
@@ -68,7 +81,16 @@ export default function Viewticket(){
         }
     });
 
+    function dialogExclude(){
+        console.log("teste")
+        setmodalTitle("Excluir?");
+        setmodalBody("Deseja realmente excluir o ticket?");
+        setmodalAction(true);
+        toggleModal();
+    }
+
     function excluirTicket(){
+        
         try{
             api.delete('tickets/'+id, {  
                 "auth": {
@@ -76,10 +98,11 @@ export default function Viewticket(){
                     "password" : authPass
                 }
             }).then(response =>{
-                console.log(response.data)
+                history.push('/home');
             })
         }catch(err){
-            alert("Não foi possivel excluir o ticket");
+            console.log(err);
+            
         }
     }
 
@@ -145,17 +168,44 @@ export default function Viewticket(){
                                         
                                     </div>
                                     <div className="buttonsActions">
-                                        <button className="buttonExcluirTicket" onClick={()=>excluirTicket()}>Excluir</button>
+                                        <button className="buttonExcluirTicket" onClick={dialogExclude}>Excluir</button>
                                         <Link to={"/edit/"+ticketInfo.id} className="linkRoute">
                                             <button className="buttonEditarTicket">Editar</button>
                                         </Link>
                                     </div>
                                 </div>
                         }
+                            
                         </div>
                     </div>
                 </div>
             </div>
+            <Modal
+                open={open}
+                onClose={toggleModal}
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+            >
+                <div  className="modalDialog">
+                    <div className="modalBox">
+                        <h2 className="modalTitle">{modalTitle}</h2>
+                        <p>
+                        {modalBody}
+                        </p>
+                        <div className="modalbuttonBoxEdit">
+                            {
+                            modalAction?
+                                <>
+                                    <button onClick={()=>excluirTicket()} className="buttonModalExclude">Excuir</button>
+                                    <button onClick={()=>toggleModal()} className="buttonModalCancel">Cancelar</button>
+                                </>
+                            :
+                                <></>
+                            }                       
+                        </div>
+                    </div>
+                </div>
+            </Modal>
         </div>
     )
 }

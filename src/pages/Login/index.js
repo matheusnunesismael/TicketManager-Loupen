@@ -3,14 +3,18 @@ import React , { useState, useEffect } from 'react';
 import logoLoupen from '../../assets/images/logo-Loupen.png';
 import logoFreshdesk from '../../assets/images/logo-FreshdeskFull.svg';
 import './styles.css';
-import { Link , useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import api from '../../services/api';
+import Modal from '@material-ui/core/Modal';
+
 
 export default function Login(){
 
     const history = useHistory();
     const [emailLogin, setemail] = useState("");
     const [senha, setsenha] = useState("");
+
+    const [open, setopen] = useState(false);
 
     async function makeLogin() {
         console.log({emailLogin, senha});
@@ -19,10 +23,10 @@ export default function Login(){
                 username: emailLogin,
                 password: senha
             }
-            const resultLogin = await api.get('tickets', {
+            await api.get('tickets', {
                 auth
             }).then( response => {
-                    if(response.status == 200){
+                    if(response.status === 200){
                         localStorage.setItem('authLogin', auth.username);
                         localStorage.setItem('authPass', auth.password);
                         history.push('/home');
@@ -32,13 +36,19 @@ export default function Login(){
             
         
         } catch (err) {
-            alert('Erro ao cadastrar caso, tente novamente.');
+            toggleModal();
         }
         return false;
     }
-
+    // ativar modal de erro no login
+    function toggleModal(){
+        setopen(!open);
+    }
+    useEffect(()=>{
+        if(localStorage.getItem('authLogin') != null)
+            history.push('/home');
+    })
  
-
     return(
         <div className="containerPage">
             <div className="pageLogin">  
@@ -63,6 +73,26 @@ export default function Login(){
                 </div>
 
             </div>
+            <Modal
+                open={open}
+                onClose={toggleModal}
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+            >
+                <div  className="modalDialog">
+                    <div className="modalBox">
+                        <h2 className="modalTitle">Erro!</h2>
+                        <p>
+                            O e-mail ou a senha inseridos não foram encontrados.
+                            <br/>
+                            Verifique se as informações estão corretas.
+                        </p>
+                        <div className="modalbuttonBox">
+                            <button onClick={()=>toggleModal()}>Ok</button>                       
+                        </div>
+                    </div>
+                </div>
+            </Modal>
         </div>
     )
 }

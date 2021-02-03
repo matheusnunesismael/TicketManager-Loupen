@@ -1,17 +1,18 @@
 import './styles.css';
 
-import { Link , useHistory } from 'react-router-dom';
+import { Link , useHistory, useParams } from 'react-router-dom';
 import React , { useState, useEffect } from 'react';
 
-import iconeLoupen from '../../assets/images/icone-Loupen.png';
-import iconeFreshdesk from '../../assets/images/logo-Freshdesk.png';
-import AddBoxIcon from '@material-ui/icons/AddBox';
 import Skeleton from '@material-ui/lab/Skeleton';
 import Pagination from '@material-ui/lab/Pagination';
+import Contextmenu from '../../components/Contextmenu';
+
+import Topbar from '../../components/Topbar';
 
 import api from '../../services/api';
 
 export default function Main(){
+    const { q } = useParams();
     const history = useHistory();
 
     const [ticketList, setTicketList] = useState([]);
@@ -29,26 +30,41 @@ export default function Main(){
         23: "EM DESENV"
     }
 
-    function handleLogout(){
-        localStorage.clear();
-        history.push('/');
-    }
-
     useEffect(()=>{
+        //controla a seção
+        if(localStorage.getItem('authLogin') == null)
+            history.push('/');
         
-    });
-    useEffect(()=>{
         // carrega os ultimos tickets registrados
-        if(ticketList.length == 0){
-            console.log("carregou")
-            api.get('tickets?per_page=10&page=1', {
+        if(ticketList.length === 0){
+            let url = "";
+            let hasQuery = false;
+            if(q && q !== "undefined"){
+                hasQuery = true;
+                let query = "";
+                let qInitUpper = q.charAt(0).toUpperCase() + q.toLowerCase().slice(1);
+                if(priorityDict.includes(qInitUpper) === true)
+                    query += "priority:"+priorityDict.indexOf(qInitUpper);
+
+                Object.getOwnPropertyNames(statusDict).forEach(function(val, idx, array) {
+                    if(statusDict[val] === qInitUpper){
+                        query += (query === "" ? "" : " OR ") + "status:"+(idx+2);
+                    }
+                });   
+                //query += (query == ""? "" : " OR ") + "subject:"+q;
+                url += `search/tickets?query="${query}"`;
+            }
+            else{
+                url = "tickets";
+            }
+            api.get(url, {
                 "auth": {
                     "username" : authLogin,
                     "password" : authPass
                 }
             }).then(async response => {
-
-                let ticketsResp = response.data;
+                
+                let ticketsResp = hasQuery ? response.data.results : response.data;
                 // busca para cada tiket o nome do usuário queo registrou e adiciona 
                 // a informação aos dados do ticket, junto com a url de um icone de perfil
                 // os substituindo em requester_id e responder_id
@@ -68,11 +84,10 @@ export default function Main(){
                     }
                     // existem usuarios quepor algum motivo não possuem nome cadastrado
                     // nesse caso será exibido apenas o nome "RequesterName"
-                    let nameUserC = requesterResponse == null? "RequesterName" : requesterResponse.data.name.split('@')[0].split(' ')[0];
+                    let nameUserC = requesterResponse == null? "Requester" : requesterResponse.data.name.split('@')[0].split(' ')[0];
 
                     ticketsResp[i].requester_id = "https://ui-avatars.com/api/?name="+nameUserC+"&size=128&background=random";
                     ticketsResp[i].responder_id = nameUserC;
-                    console.log(ticketsResp[i])
                 }
                 // atualiza os tickets na lista para serem visualizados 
                 setTicketList(ticketsResp);
@@ -82,65 +97,18 @@ export default function Main(){
 
     return(
         <div>
-            <input id="menu-hamburguer" type="checkbox" className="inputHamburguer"/>
-            <label htmlFor="menu-hamburguer">
-                <div className="menu">
-                    <span className="hamburguer"></span>
-                </div>
-            </label>
-            <div className="contextMenu">
-                <div className="conatinerContext">
-                    <div className="topBarContext">
-                        <div className="topBarContainer">
-                            <img src={ iconeLoupen } alt="userImage" className="imageIconContext"/>
-                            <div className="textUserName">
-                                NomeUsuario
-                            </div>
-                        </div>  
-                    </div>
-                    <div className="contextOption" onClick={()=>history.push('/home')}>
-                        Listar Tickets
-                    </div>
-                    <div className="contextOption" onClick={()=>history.push('/new')}>
-                        Novo Ticket
-                    </div>
-                    <div className="contextOptionExit" onClick={handleLogout}>
-                        Sair
-                    </div>
-                </div>
-                <label htmlFor="">
-                    <div>
-
-                    </div>
-                </label>
-            </div>
-            
+            <Contextmenu/>
+            <Topbar/>
             <div className="contentContainerMain">
-                <div className="topBarContent">
-                    <img src={iconeFreshdesk} alt="FreshdeskTaskManager" className="logoFrashdeskTopBar"/>
-                    <div className="formContainerInput">
-                        <form action="">
-                            <input type="search" placeholder="Buscar Ticket" className="inputSearchTopBar"/>  
-                        </form>
-                        <div className="containerNewTicket">
-                            <Link to="/new" className="linkRoute">
-                                <button className="buttonNewTicket" >
-                                    <AddBoxIcon className="iconNewTicket"/>
-                                    Novo Ticket
-                                </button>
-                            </Link>
-                        </div>
-                    </div>
-                </div>
                 <div className="ticketsResult">
                     <div className="searchResults">
                         {
                             // carrega placeHolders enquanto não há dados
-                            ticketList.length == 0?
+                            ticketList.length === 0?
                                 <div className="">
-                                    <Skeleton variant="rect"  className ="compSkelethon" height={118} />
-                                    <Skeleton variant="rect" className ="compSkelethon"  height={118} />
-                                    <Skeleton variant="rect" className ="compSkelethon"  height={118} />
+                                    <Skeleton variant="rect"  className ="compSkelethon" height={130} />
+                                    <Skeleton variant="rect" className ="compSkelethon"  height={130} />
+                                    <Skeleton variant="rect" className ="compSkelethon"  height={130} />
                                 </div>
                             :
                                 ticketList.map(ticket => 
@@ -192,7 +160,7 @@ export default function Main(){
                                     </Link>
                                 )
                         }
-                        <Pagination count={10} variant="outlined" shape="rounded" />
+                        <Pagination count={3} val={2} variant="outlined" shape="rounded"  style={{display:"none"}}/>
                     </div>
                 </div>
             </div>
