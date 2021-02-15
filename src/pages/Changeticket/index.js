@@ -38,7 +38,7 @@ export default function Changeticket(){
 
     // campos para filtrar os tipos do form de dados
     let numberFields = ["priority", "requester_id", "responder_id", "group_id", "status"];
-    let unusedFields = ["updated_at", "created_at", "responder_id", "description", "description_text", "id", "due_by", "fr_due_by"];
+    let unusedFields = ["updated_at", "created_at", "responder_id", "description", "description_text", "id", "due_by", "fr_due_by", "ticket_cc_emails", "fr_escalated", "spam", "is_escalated", "nr_escalated", "cc_emails", "fwd_emails", "reply_cc_emails", "attachments"];
 
     function toggleModal(){
         setopen(!open);
